@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    networks:
+      - backend
+
+  app:
+    build:
+      context: ./NacitanieKurzovConsoleApp
+      dockerfile: Dockerfile
+    container_name: dotnet_app
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=db;Database=EventsDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
+    networks:
+      - backend
+
+networks:
+  backend:
