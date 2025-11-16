@@ -11,9 +11,10 @@ public static class EventMessageConsumer
     {
         var tasks = new List<Task>(channels.Length);
 
-        foreach (var channel in channels)
+        for (var partitionIndex = 0; partitionIndex < channels.Length; partitionIndex++)
         {
-            var reader = channel.Reader;
+            var reader = channels[partitionIndex].Reader;
+            var localPartitionIndex = partitionIndex;
 
             tasks.Add(Task.Run(async () =>
             {
@@ -21,6 +22,9 @@ public static class EventMessageConsumer
 
                 await foreach (var message in reader.ReadAllAsync())
                 {
+                    var eventId = message.Event!.ProviderEventID;
+                    Console.WriteLine($"Consuming message for EventId {eventId} from partition {localPartitionIndex}.");
+
                     await ProcessMessageAsync(message, connectionString, random);
                 }
             }));
