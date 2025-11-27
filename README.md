@@ -16,11 +16,18 @@ Aplikácia:
 ## Setup (Docker Compose)
 Je potrebný Docker + Git.
 
-```bash
-git clone https://github.com/SimSef/efektivne_nacitanie_kurzov_demo.git
-cd efektivne_nacitanie_kurzov_demo
-docker compose up --build
-```
+- repo clone:
+  ```bash
+  git clone https://github.com/SimSef/efektivne_nacitanie_kurzov_demo.git
+  ```
+- cd dir:
+  ```bash
+  cd efektivne_nacitanie_kurzov_demo
+  ```
+- run docker compose:
+  ```bash
+  docker compose up --build
+  ```
 
 Priebeh:
 - SQL Server kontajner sa spustí s parametrami z `docker-compose.yml`.
