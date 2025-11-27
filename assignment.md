@@ -85,12 +85,6 @@ Pred uložením každej udalosti do databázy musí byť vykonané volanie exter
 - Cieľom nie je len uložiť dáta, ale urobiť to čo najrýchlejšie (využiť paralelizmus) a s čo najnižšou záťažou na databázu – vhodne zvoliť spôsob ukladania dát (dôraz na výkon).
 - Nie je nutné riešiť situáciu vypnutia aplikácie počas spracovávania.
 
-### 6. Odporúčaná pomôcka
-
-- Odporúča sa použiť **queues (fronty)** – napríklad:
-  - jedna queue na každú udalosť, alebo
-  - partitioning podľa `ProviderEventID`.
-
 ## Zhrnutie očakávaného výsledku
 
 Aplikácia by mala:
