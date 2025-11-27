@@ -17,6 +17,12 @@ Console.WriteLine($"Created {channels.Length} bounded partitions.");
 
 var messages = await JsonMessageLoader.LoadAllAsync();
 Console.WriteLine($"Loaded {messages.Count} messages from JSON.");
+var uniqueEventCount = messages
+    .Where(m => m.Event is not null)
+    .Select(m => m.Event!.ProviderEventID)
+    .Distinct()
+    .Count();
+Console.WriteLine($"Found {uniqueEventCount} unique events.");
 
 var consumerTask = EventMessageConsumer.StartConsumersAsync(channels, connectionString);
 
